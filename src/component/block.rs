@@ -1,4 +1,4 @@
-use bevy::{prelude::*, ecs::system::EntityCommands};
+use bevy::{ecs::system::EntityCommands, prelude::*};
 
 #[derive(Debug, Component)]
 pub struct Block {

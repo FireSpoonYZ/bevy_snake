@@ -1,5 +1,5 @@
-use bevy::prelude::*;
 use crate::*;
+use bevy::prelude::*;
 
 pub fn eat_food(
     query: Query<&Block, (With<SnakeHead>, Changed<Block>)>,

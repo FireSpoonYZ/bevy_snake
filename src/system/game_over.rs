@@ -1,5 +1,5 @@
-use bevy::prelude::*;
 use crate::*;
+use bevy::prelude::*;
 
 pub fn game_over(
     mut timer: ResMut<MainTimer>,

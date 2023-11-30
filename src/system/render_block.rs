@@ -2,7 +2,9 @@ use bevy::prelude::*;
 
 use crate::Block;
 
-pub fn render_blocks(mut query: Query<(&Block, &mut Visibility, &mut Sprite, &mut Transform), Changed<Block>>) {
+pub fn render_blocks(
+    mut query: Query<(&Block, &mut Visibility, &mut Sprite, &mut Transform), Changed<Block>>,
+) {
     for (block, mut visibility, mut sprite, mut transform) in query.iter_mut() {
         sprite.color = block.color;
         *visibility = Visibility::Visible;

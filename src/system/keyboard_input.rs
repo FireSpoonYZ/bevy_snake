@@ -1,9 +1,13 @@
+use crate::*;
 use bevy::prelude::*;
 
-use crate::Volocity;
-
-pub fn keyboard_input(input: Res<Input<KeyCode>>, mut query: Query<&mut Volocity>) {
-    for mut volocity in query.iter_mut() {
+pub fn keyboard_input(
+    input: Res<Input<KeyCode>>,
+    mut query: Query<(&Block, &mut Volocity)>,
+    body: Res<SnakeBody>,
+    world: &World,
+) {
+    for (block, mut volocity) in query.iter_mut() {
         let origin_volocity = *volocity;
 
         if input.just_pressed(KeyCode::Left) {
@@ -23,8 +27,16 @@ pub fn keyboard_input(input: Res<Input<KeyCode>>, mut query: Query<&mut Volocity
             volocity.y = -1;
         }
 
-        if volocity.last_x + volocity.x == 0 && volocity.last_y + volocity.y == 0 || (volocity.last_x == 0 && volocity.last_y == 0) {
-            *volocity = origin_volocity;
+        if let Some(first_id) = body.0.front() {
+            if let Some(entity) = world.get_entity(*first_id) {
+                if let Some(first_block) = entity.get::<Block>() {
+                    if first_block.x == block.x + volocity.x
+                        && first_block.y == block.y + volocity.y
+                    {
+                        *volocity = origin_volocity;
+                    }
+                }
+            }
         }
     }
 }

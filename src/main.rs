@@ -1,12 +1,12 @@
 pub mod component;
 pub mod entity;
-pub mod system;
 pub mod resource;
+pub mod system;
 
 pub use component::*;
 pub use entity::*;
-pub use system::*;
 pub use resource::*;
+pub use system::*;
 
 use bevy::{prelude::*, window::*};
 
@@ -25,7 +25,17 @@ fn main() {
         .init_resource::<SnakeBody>()
         .insert_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
         .add_systems(Startup, init)
-        .add_systems(Update, (render_blocks, flush_food, move_head, keyboard_input, eat_food, game_over))
+        .add_systems(
+            Update,
+            (
+                render_blocks,
+                flush_food,
+                move_head,
+                keyboard_input,
+                eat_food,
+                game_over,
+            ),
+        )
         .run();
 }
 
@@ -36,7 +46,7 @@ fn init(mut commands: Commands) {
     // spawn snake head
     spawn_block(&mut commands, Color::RED, 0, 0)
         .insert(SnakeHead)
-        .insert(Volocity { x: 0, y: 1, last_x: 0, last_y: 1 });
+        .insert(Volocity { x: 0, y: 1 });
 
     // spawn wall
     for i in -13..14 {
@@ -50,4 +60,3 @@ fn init(mut commands: Commands) {
     // spawn food
     spawn_block(&mut commands, Color::BLUE, 0, 0).insert(Food::new());
 }
-

@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use rand::Rng;
 
-use crate::{Food, Block, Wall};
+use crate::{Block, Food, Wall};
 
 pub fn flush_food(
     mut query: Query<(&mut Food, &mut Block), Changed<Food>>,
