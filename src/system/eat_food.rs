@@ -4,7 +4,7 @@ use bevy::prelude::*;
 pub fn eat_food(
     query: Query<&Block, (With<SnakeHead>, Changed<Block>)>,
     mut food_query: Query<(&mut Food, &Block), Without<SnakeHead>>,
-    mut body: ResMut<SnakeBody>,
+    mut body: ResMut<SnakeBodys>,
     mut commands: Commands,
 ) {
     for block in query.iter() {

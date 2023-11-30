@@ -22,7 +22,7 @@ fn main() {
             ..Default::default()
         }))
         .insert_resource(MainTimer(Timer::from_seconds(0.2, TimerMode::Repeating)))
-        .init_resource::<SnakeBody>()
+        .init_resource::<SnakeBodys>()
         .insert_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
         .add_systems(Startup, init)
         .add_systems(
